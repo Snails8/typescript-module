@@ -1,0 +1,31 @@
+{
+  "name": "typescript-module",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Kaito Suzuki <snails8d@gmail.com>",
+  "license": "MIT",
+  "volta": {
+    "node": "20.1.0",
+    "yarn": "4.1.0"
+  },
+  "scripts": {
+    "dev": "npx ts-node-dev --require tsconfig-paths/register --no-notify --respawn --project tsconfig.json src/server.ts",
+    "start": "node dist/src/server.js",
+    "build": "rm -rf dist && tsc -p ."
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.21",
+    "dotenv": "^16.4.5",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "@apollo/server": "^4.10.4",
+    "@types/graphql": "^14.5.0",
+    "apollo-server-express": "^3.13.0",
+    "express": "^4.19.2",
+    "graphql": "^16.9.0"
+  }
+}
