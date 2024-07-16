@@ -12,16 +12,28 @@ app.get("/", (req: Request, res: Response) => {
 const server = new ApolloServer({
   typeDefs: typeDefs,
   resolvers: resolvers,
+  formatError: (error) => {
+    console.error(JSON.stringify(error));
+    return error;
+  }
 });
 
 (async () => {
   await server.start();
   server.applyMiddleware({ app });
 
-  app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
-    console.log(
-      `GraphQL Playground available at http://localhost:${PORT}${server.graphqlPath}`
-    );
-  });
+  try {
+    app.listen(PORT, () => {
+      console.log(`Server is running on http://localhost:${PORT}`);
+      console.log(
+        `GraphQL Playground available at http://localhost:${PORT}${server.graphqlPath}`
+      );
+    });
+  } catch (e) {
+    if (e instanceof Error) {
+      console.error(e.message);
+      throw new Error('Error: server', e);    
+    }
+    throw new Error(`Server failed with non-standard error: ${String(e)}`);
+  }
 })();
