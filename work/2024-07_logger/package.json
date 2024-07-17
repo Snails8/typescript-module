@@ -11,9 +11,14 @@
   "scripts": {
     "dev": "npx ts-node-dev --require tsconfig-paths/register --no-notify --respawn --project tsconfig.json src/server.ts",
     "start": "node dist/src/server.js",
-    "build": "rm -rf dist && tsc -p ."
+    "build": "rm -rf dist && tsc -p .",
+    "generate": "npx graphql-codegen ",
+    "codegen": "graphql-codegen --config codegen.yml"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "5.0.2",
+    "@graphql-codegen/typescript": "4.0.9",
+    "@graphql-codegen/typescript-resolvers": "4.2.1",
     "@types/express": "^4.17.21",
     "@types/node": "^20.11.21",
     "dotenv": "^16.4.5",

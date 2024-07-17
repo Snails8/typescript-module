@@ -1,24 +1,4 @@
-import { gql } from "apollo-server-express";
 import { doErrorHandler } from "./handler/doErrorHandler";
-
-export const typeDefs = gql`
-  type Query {
-    hello: String!
-    books: [Book!]!
-    doError(input: DoErrorInput!): String!
-    check: String!
-  }
-
-  type Book {
-    title: String!
-    author: String!
-  }
-
-  input DoErrorInput {
-    params: String
-    sub: String
-  }
-`;
 
 export const resolvers = {
   Query: {
@@ -38,14 +18,13 @@ export const resolvers = {
   },
 };
 
-async function errorInterceptor(resolver: any) {
-  return async function(parent, args, context, info) {
-    try {
-      return await resolver(parent, args, context, info);
-    } catch (error) {
-      console.error(JSON.stringify(error));
-      return error;
-    }
-    
-  }
-}
+// async function errorInterceptor(resolver: any) {
+//   return async function (parent, args, context, info) {
+//     try {
+//       return await resolver(parent, args, context, info);
+//     } catch (error) {
+//       console.error(JSON.stringify(error));
+//       return error;
+//     }
+//   };
+// }

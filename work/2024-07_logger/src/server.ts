@@ -1,6 +1,8 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, gql } from "apollo-server-express";
 import express, { Request, Response } from "express";
 import { resolvers, typeDefs } from "./schema";
+import fs from "fs";
+import path from "path";
 
 const app = express();
 const PORT = 4000;
@@ -10,7 +12,7 @@ app.get("/", (req: Request, res: Response) => {
 });
 
 const server = new ApolloServer({
-  typeDefs: typeDefs,
+  typeDefs: gql(fs.readFileSync(path.join(__dirname, 'schema.graphql'), 'utf-8')),
   resolvers: resolvers,
   formatError: (error) => {
     console.error(JSON.stringify(error));
