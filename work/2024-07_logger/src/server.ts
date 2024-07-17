@@ -1,8 +1,8 @@
 import { ApolloServer, gql } from "apollo-server-express";
 import express, { Request, Response } from "express";
-import { resolvers, typeDefs } from "./schema";
 import fs from "fs";
 import path from "path";
+import { resolvers } from "./handler";
 
 const app = express();
 const PORT = 4000;

@@ -1,8 +1,9 @@
-import { doErrorHandler } from "./handler/doErrorHandler";
+import { Resolvers } from "@/generated/graphql";
+import { doErrorHandler } from "./doErrorHandler";
 
-export const resolvers = {
+export const resolvers: Resolvers = {
   Query: {
-    check: () => process.env.NODE_ENV,
+    check: () => process.env.NODE_ENV ?? 'development',
     hello: () => "Hello World",
     books: () => [
       {

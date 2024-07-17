@@ -1,3 +1,4 @@
+import { QueryDoErrorArgs } from "@/generated/graphql";
 import { doErrorUC } from "@/usecase/doErrorUC";
 
 type DoErrorInput = {
@@ -5,14 +6,19 @@ type DoErrorInput = {
   sub: string;
 };
 
-export function doErrorHandler(parent: any, args: { input: { params: string, sub: string } }, context: any, info: any) {
+type DoErrorArgs = {
+  input: DoErrorInput;
+};
+
+export function doErrorHandler(parent: any, args: QueryDoErrorArgs, context: any, info: any): string {
   const { params, sub } = args.input;
-  
+  if (params == null) {
+    throw new Error("mission params");
+  }
   if (params === 'handler') {
     throw new Error("arg error");
   }
 
-  // ここでdoErrorUC関数を呼び出す（実装に応じて）
   doErrorUC(params);
   return 'error'
 }
